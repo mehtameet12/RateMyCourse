@@ -123,7 +123,7 @@ urls = [
   'http://catalogue.uottawa.ca/en/courses/not/',
   'http://catalogue.uottawa.ca/en/courses/nsg/',
    "http://catalogue.uottawa.ca/en/courses/obg/",
-   "http://catalogue.uottawa.ca/en/courses/erg/",
+"http://catalogue.uottawa.ca/en/courses/erg/",
     "http://catalogue.uottawa.ca/en/courses/omt/",
     "http://catalogue.uottawa.ca/en/courses/oph/",
     "http://catalogue.uottawa.ca/en/courses/ort/",
