@@ -256,19 +256,19 @@ img{
     grid-template-rows: repeat(2, max-content);
     align-content: space-around;
     row-gap: 2rem;
-    display: flex; /* add this line */
-    flex-direction: column; /* add this line */
-    justify-content: center; /* add this line */
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
 }
 .home__data{
     /* border-left: 4px solid var(--first-color-lighten); */
     color: var(--first-color-lighten);
     padding-left: 1.5rem;
     z-index: var(--z-tooltip);
-    text-align: center; /* add this line */
+    text-align: center;
 }
 .home__name{
-    font-size: var(--biggest-font-size);
+    font-size: var(--h1-font-size);
 }
 
 .home__greeting, .home__profession{
@@ -311,6 +311,34 @@ img{
 
 }
 
+/* Search Form */
+.search-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .search-form input[type="text"] {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 16px;
+    width: 300px;
+  }
+  
+  .search-form input[type="text"]:focus {
+    outline: none;
+    border-color: var(--first-color);
+  }
+  .input-group{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+  }
+  .input-group label {
+    margin-bottom: 5px;
+  }
 
 /* Buttons */
 .button{
