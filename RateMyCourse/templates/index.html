@@ -45,14 +45,13 @@
                 </div>
             </nav>
         </header>
-
-        <div class="modal" id="loginModal">
+        
+        <!-- <div class="modal" id="loginModal">
             <div class="modal-content">
                 <span class="close-modal" onclick="closeModal()">&times;</span>
                 <h2>Login</h2>
-                <button class="google-login"><i class='bx bxl-google'></i><a href="{% provider_login_url 'google' %}">Login with Google</a>
-                </button>
-                <div class = "divider"></div>
+                <button class="google-login"><i class='bx bxl-google'></i>Login with Google</a></button>
+                <div class="divider"></div>
                     <label for="subject-code">  Or login with email  </label>
                 <form class="login-form">
                     <input type="email" placeholder="Email">
@@ -64,7 +63,32 @@
                 </form>
             </div>
         </div>
-        
+         -->
+         <!-- Add the necessary template tag at the beginning -->
+{% load allauth %}
+
+<div class="modal" id="loginModal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <h2>Login</h2>
+        <button class="google-login">
+            <i class="bx bxl-google"></i>
+            <a href="{% provider_login_url 'google' %}">Login with Google</a>
+        </button>
+        <div class="divider"></div>
+        <label for="subject-code">Or login with email</label>
+        <form class="login-form">
+            <input type="email" placeholder="Email">
+            <input type="password" placeholder="Password">
+            <button type="submit" class="continue-button">Continue</button>
+            <button class="forgot-password">Forgot Password?</button>
+            <span class="account-text">Don't have an account?
+                <button class="signup-instead" onclick="setTimeout(() => { closeModal(); openSignupModal(); }, 200)">Sign Up Instead</button>
+            </span>
+        </form>
+    </div>
+</div>
+
         <div class="modal" id="signupModal">
             <div class="modal-content">
                 <span class="close-modal" onclick="closeModal()">&times;</span>
