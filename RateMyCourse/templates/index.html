@@ -79,6 +79,11 @@
                     <input type="email" name = "email" placeholder="Email">
                     <input type="password" name = "password1" placeholder="Password">
                     <input type="password" name = "password2" placeholder="Confirm Password">
+                    <div class="error-message">
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                    </div>
                     <button type="submit" class="continue-button" >Continue</button>
                     <span class="account-text">Already have an account?
                     <button class="login-instead" onclick="setTimeout(() => { closeModal(); openLoginModal(); }, 200)">Log In Instead</button></span>
@@ -100,7 +105,6 @@
                                 <label for="subject-code">Enter subject code:</label>
                                 <input type="text" id="subject-code" name="query" placeholder="Eg. SEG">
                             </div>
-
                             <div class = "input-group">
                                 <label for="course-code">Enter course code:</label>
                                 <input type="text" id="course-code" name="query" placeholder="Eg. 3125">
