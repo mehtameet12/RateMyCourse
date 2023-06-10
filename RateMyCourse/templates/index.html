@@ -59,7 +59,7 @@
                     <button type="submit" class="continue-button" >Continue</button>
                     <button class="forgot-password">Forgot Password?</button>
                     <span class="account-text">Don't have an account?
-                    <button class="signup-instead" onclick="setTimeout(() => { closeModal(); openSignupModal(); }, 100)">Sign Up Instead</button></span>
+                    <button class="signup-instead" onclick="setTimeout(() => { closeModal(); openSignupModal(); }, 200)">Sign Up Instead</button></span>
                 </form>
             </div>
         </div>
@@ -70,12 +70,17 @@
                 <h2>Sign Up</h2>
                 <button class="google-login"><i class='bx bxl-google'></i>Sign Up with Google</button>
                 <div class = "divider"></div>
-                    <label for="subject-code">  Or sign up with email  </label>
+                    <label for="subject-code">  Or sign up with username  </label>
                 <form class = "signup-form">
+                    <input type="email" placeholder="First Name">
+                    <input type="email" placeholder="Last Name">
+                    <input type="email" placeholder="Username">
                     <input type="email" placeholder="Email">
+                    <input type="password" placeholder="Password">
+                    <input type="password" placeholder="Confirm Password">
                     <button type="submit" class="continue-button" >Continue</button>
                     <span class="account-text">Already have an account?
-                    <button class="login-instead" onclick="setTimeout(() => { closeModal(); openLoginModal(); }, 100)">Log In Instead</button></span>
+                    <button class="login-instead" onclick="setTimeout(() => { closeModal(); openLoginModal(); }, 200)">Log In Instead</button></span>
                 </form>
             </div>
         </div>
