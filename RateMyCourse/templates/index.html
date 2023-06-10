@@ -71,13 +71,14 @@
                 <button class="google-login"><i class='bx bxl-google'></i>Sign Up with Google</button>
                 <div class = "divider"></div>
                     <label for="subject-code">  Or sign up with username  </label>
-                <form class = "signup-form">
-                    <input type="email" placeholder="First Name">
-                    <input type="email" placeholder="Last Name">
-                    <input type="email" placeholder="Username">
-                    <input type="email" placeholder="Email">
-                    <input type="password" placeholder="Password">
-                    <input type="password" placeholder="Confirm Password">
+                <form class = "signup-form" method ="post" action="signup">
+                    {% csrf_token %}
+                    <input type="name" name = "first_name" placeholder="First Name">
+                    <input type="name" name = "last_name" placeholder="Last Name">
+                    <input type="name" name = "username" placeholder="Username">
+                    <input type="email" name = "email" placeholder="Email">
+                    <input type="password" name = "password1" placeholder="Password">
+                    <input type="password" name = "password2" placeholder="Confirm Password">
                     <button type="submit" class="continue-button" >Continue</button>
                     <span class="account-text">Already have an account?
                     <button class="login-instead" onclick="setTimeout(() => { closeModal(); openLoginModal(); }, 200)">Log In Instead</button></span>
@@ -105,7 +106,6 @@
                                 <input type="text" id="course-code" name="query" placeholder="Eg. 3125">
                             </div>
                         </form>
-                        <!-- <a download ="" href="#" class="btn from-top ">Search the courses here!</a> -->
                     </div>
                 </div>                
 			</section>
