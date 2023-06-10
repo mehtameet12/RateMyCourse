@@ -386,6 +386,7 @@ img{
 }
   
 .signup-form input[type="email"],
+.signup-form input[type="name"],
 .signup-form input[type="password"] {
     border: 2px solid var(--first-color-lighten2);
     border-radius: 10px;
@@ -395,6 +396,7 @@ img{
 }
 
 .signup-form input[type="email"]:focus,
+.signup-form input[type="name"]:focus,
 .signup-form input[type="password"]:focus {
     outline: none;
     border-color: var(--first-color);
