@@ -27,20 +27,59 @@
 
 		<!-- Header -->
 		<header class="l-header" id="header">
-			<nav class="nav bd-container">
-				<a href="" class="nav__logo">Rate My Course</a>
-				<div class="nav__menu" id="nav-menu">
-					<ul class="nav__list">
-						<li class="nav__item"><a href="#" class="nav__link active-link">Log In</a></li>
-						<li class="nav__item"><a href="#" class="nav__link">Sign Up</a></li>
+            <nav class="nav bd-container">
+                <a href="" class="nav__logo">Rate My Course</a>
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item">
+                            <a href="#" class="nav__link active-link" onclick="openLoginModal()">Log In</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#" class="nav__link" onclick="openSignupModal()">Sign Up</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class='bx bx-menu'></i>
+                </div>
+            </nav>
+        </header>
 
-					</ul>
-				</div>
-				<div class="nav__toggle" id="nav-toggle">
-					<i class='bx bx-menu'></i>
-				</div>
-			</nav>
-		</header>
+        <div class="modal" id="loginModal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeModal()">&times;</span>
+                <h2>Login</h2>
+                <button class="google-login"><i class='bx bxl-google'></i>Login with Google</button>
+                <div class = "divider"></div>
+                    <label for="subject-code">  Or login with email  </label>
+                <form class="login-form">
+                    <input type="email" placeholder="Email">
+                    <input type="password" placeholder="Password">
+                    <button type="submit" class="continue-button" >Continue</button>
+                    <button class="forgot-password">Forgot Password?</button>
+                    <span class="account-text">Already have an account?
+                    <button class="signup-instead" onclick="setTimeout(() => { closeModal(); openSignupModal(); }, 100)">Sign Up Instead</button></span>
+                </form>
+            </div>
+        </div>
+        
+        <div class="modal" id="signupModal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeModal()">&times;</span>
+                <h2>Sign Up</h2>
+                <button class="google-login"><i class='bx bxl-google'></i>Sign Up with Google</button>
+                <div class = "divider"></div>
+                    <label for="subject-code">  Or sign up with email  </label>
+                <form class = "signup-form">
+                    <input type="email" placeholder="Email">
+                    <button type="submit" class="continue-button" >Continue</button>
+                    <span class="account-text">Already have an account?
+                    <button class="login-instead" onclick="setTimeout(() => { closeModal(); openLoginModal(); }, 100)">Log In Instead</button></span>
+                </form>
+            </div>
+        </div>
+        
+
         <main class = "l-main">
 			<!-- HOME -->
 			<section class="home_backdrop-container">

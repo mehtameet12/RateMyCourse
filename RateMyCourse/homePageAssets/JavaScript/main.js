@@ -84,6 +84,21 @@ gsap.from('.nav__logo, .nav__toggle',{opacity: 0, duration: 1, delay:.35, y:25, 
 gsap.from('.nav__item',{opacity: 0, duration: 1, delay:.35, y:25, ease:'expo.out', stagger:.2})
 gsap.from('.home__social-icon',{opacity: 0, duration: 1, delay:.45, y:25, ease:'expo.out', stagger:.2})
 
+/* Sign-Up and Log-In Pop-Up */
+function openLoginModal() {
+  document.getElementById("loginModal").style.display = "block";
+}
+
+function openSignupModal() {
+  document.getElementById("signupModal").style.display = "block";
+}
+
+function closeModal() {
+  document.getElementById("loginModal").style.display = "none";
+  document.getElementById("signupModal").style.display = "none";
+}
+
+
 
 /* Home Annimation */
 document.querySelector('.home').classList.add('show');
