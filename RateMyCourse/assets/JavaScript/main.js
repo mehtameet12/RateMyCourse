@@ -98,6 +98,17 @@ function closeModal() {
   document.getElementById("signupModal").style.display = "none";
 }
 
+function handleSignupFormResponse(data) {
+    if (data.success) {
+        // Handle success response
+    } else if (data.show_login_modal) {
+        openLoginModal();  // Call your existing function to open the login modal
+    } else {
+        // Handle other responses as needed
+    }
+}
+
+
 
 
 /* Home Annimation */

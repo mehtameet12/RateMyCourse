@@ -32,3 +32,5 @@ def signup(request):
     else:
         return render(request, 'index.html')
 
+def login(request):
+    return render(request, 'index.html')

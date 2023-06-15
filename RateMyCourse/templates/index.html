@@ -153,15 +153,15 @@
 	</body>
 </html>
 
-<script>
+<!-- <script>
     const signupForm = document.querySelector('.signup-form');
     const loginForm = document.querySelector('.login-form');
     const loginInsteadButton = document.querySelector('.login-instead');
     const signUpInsteadButton = document.querySelector('.signup-instead');
 
     signupForm.addEventListener('submit', function (event) {
-      event.preventDefault();
-      const formData = new FormData(signupForm);
+
+    const formData = new FormData(signupForm);
   
       fetch('/signup/', {
         method: 'POST',
@@ -177,7 +177,7 @@
     });
 
     loginForm.addEventListener('submit', function (event) {
-        event.preventDefault();
+        
         const formData = new FormData(loginForm);
     
         fetch('/login/', {
@@ -193,4 +193,4 @@
         closeModal();
         openSignupModal();
       });
-  </script>
+  </script> -->
