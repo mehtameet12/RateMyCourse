@@ -1,0 +1,29 @@
+{% extends "base.html %}
+{% block title %}Sign in{% endblock %}
+{% block content %}
+    <div class ="row">
+        <!-- <div class ="col-md-6 offset-md-3">
+            <h2>Sign in</h2>
+            {% if error_message %}
+                <p>{{ error_message }}</p>
+            {% endif %}
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <div>
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username">
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password">
+                </div>
+                <input type="submit" value="Login">
+            </form>
+        </div> -->
+        <div class = "col-md-8 mx-auto social-container my-2 order-md-1">
+            <button class="btn btn-primary mb-2">
+                <a href="{% url 'social:begin' 'google-auth2' %}">Login with Google</a>
+            </button>
+        </div>
+    </div>
+{% endblock %}
