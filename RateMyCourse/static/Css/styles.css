@@ -14,6 +14,7 @@
     --first-color-light: #1F4287;
     --first-color-lighten: #fbf9f9;
     --first-color-lighten2:#adadad;
+    --first-color-ratings: #13b5f0;
 
     /* Font and Typography */
 
@@ -588,39 +589,39 @@ img{
 }
 
 .ratings__title {
-    font-size: 1.5rem;
+    font-size: var(--h1-font-size);
     font-weight: bold;
-    color: #000;
+    color: var(--first-color-lighten);
 }
 
 .ratings__stars {
-    font-size: 1.5rem;
-    color: #ffd700;
+    font-size: var(--h1-font-size);
+    color: var(--first-color-ratings);
 }
 
 .ratings__difficulty {
-    font-size: 1rem;
+    font-size: var(--normal-font-size);
     font-weight: bold;
-    color: #000;
+    color: var(--first-color-lighten);
 }
 
 .graph {
     width: 100%;
     height: 2rem;
-    background-color: #ddd;
+    background-color: var(--first-color-lighten);
     border-radius: 5px;
     overflow: hidden;
 }
 
 .graph__bar {
     height: 100%;
-    background-color: #ffc107;
+    background-color: var(--first-color-ratings);
     transition: width 0.5s ease-in-out;
 }
 
 /* Card Styles */
 .card {
-/* Add styles for the card */
+
 }
 
 /* Search Form */
