@@ -605,6 +605,11 @@ img{
     color: var(--first-color-lighten);
 }
 
+.star {
+    /* Default star color */
+    color: var(--first-color-lighten);
+}
+
 .graph {
     width: 100%;
     height: 2rem;
