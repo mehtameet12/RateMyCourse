@@ -1,8 +1,161 @@
-<html>
-<head>
-    <title>Rate My Course</title>
-</head>
-<body>
-    <p>This is the result page!!
-</body>
+{%load static%}
+<!DOCTYPE html>
+<html lang ="en">
+
+    <!-- Header -->
+	<head>
+		
+		<meta charset= "UTF-8">
+		<meta name = "viewport" content="width-device-width, initial-scale=1.0">
+		
+		<!-- Swiper Class -->
+		<link rel ="stylesheet" href ="">
+
+		<!-- Box Icons -->
+		<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+		<!-- CSS -->
+		<link rel = "stylesheet" href = "{% static 'Css/styles.css' %}">
+
+		<title> Rate My Course </title>
+
+	</head>
+
+    <body>
+		<!-- Scroll Top -->
+		<a href="#" class="scrolltop" id="scroll-top">
+			<i class='bx bx-chevron-up scroll-top__icon' ></i>
+		</a>
+
+		<!-- Header -->
+		<header class="l-header" id="header">
+            <nav class="nav bd-container">
+                <a href="" class="nav__logo">Rate My Course</a>
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item">
+                            <a href="#" class="nav__link active-link" onclick="openLoginModal()">Log In</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#" class="nav__link" onclick="openSignupModal()">Sign Up</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class='bx bx-menu'></i>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Login Modal -->
+        <div class="modal" id="loginModal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeModal()">&times;</span>
+                <h2>Login</h2>
+                <button class="google-login">
+                    <i class='bx bxl-google'></i>
+                    <span class="google-text">Login with Google</span>
+                </button>
+                <div class = "divider"></div>
+                    <label for="subject-code">  Or login with email  </label>
+                <form class="login-form" metod = "post" action="login/">
+                    <input type="email" placeholder="Email">
+                    <input type="password" placeholder="Password">
+                    <button type="submit" class="continue-button" >Continue</button>
+                    <button class="forgot-password">Forgot Password?</button>
+                </form>
+                <span class="account-text">Don't have an account?
+                    <button class="signup-instead" onclick="setTimeout(() => { closeModal(); openSignupModal(); }, 200)">Sign Up Instead</button></span>
+            </div>
+        </div>
+        
+        <!-- SignUp Modal -->
+        <div class="modal" id="signupModal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeModal()">&times;</span>
+                <h2>Sign Up</h2>
+                <button class="google-login">
+                    <i class='bx bxl-google'></i>
+                    <span class="google-text">Sign Up with Google</span>
+                </button>
+                <div class = "divider"></div>
+                    <label for="subject-code">  Or sign up with username  </label>
+                <form class = "signup-form" method ="post" action="signup/">
+                    {% csrf_token %}
+                    <input type="name" name = "first_name" placeholder="First Name">
+                    <input type="name" name = "last_name" placeholder="Last Name">
+                    <input type="name" name = "username" placeholder="Username">
+                    <input type="email" name = "email" placeholder="Email">
+                    <input type="password" name = "password1" placeholder="Password">
+                    <input type="password" name = "password2" placeholder="Confirm Password">
+                    <div class="error-message">
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                    </div>
+                    <button type="submit" class="continue-button" >Continue</button>
+                </form>
+                <span class="account-text">Already have an account?
+                    <button class="login-instead" onclick="setTimeout(() => { closeModal(); openLoginModal(); }, 200)">Log In Instead</button></span>
+            </div>
+        </div>
+        
+
+        <main class="l-main">
+            <!-- RESULT -->
+            <section class="result_backdrop-container">
+                <section class="home" id="result">
+                  <div class="result__container bd-container bd-grid">
+                    <div class="ratings">
+                      <h2 class="ratings__title">Course Ratings</h2>
+                      <div class="ratings__stars">
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                      </div>
+                      <h3 class="ratings__difficulty">Difficulty: Intermediate</h3>
+                    </div>
+                    <div class="graph">
+                      <div class="graph__bar" style="width: 50%;"></div>
+                    </div>
+                    <div class="card">
+                      <!-- Card content goes here -->
+                    </div>
+                  </div>
+                </section>
+              </section>
+              
+        </main>
+          
+        
+        <!-- Footer -->
+		<footer class="footer">
+			<div class="footer__container bd-container">
+				<h1 class="footer__title">Rate My Course</h1>
+				<p class="footer__description">The Student's Crystal Ball!</p>
+				<div class="footer__social">
+					<a href="#" class="footer__link"><i class='bx bxl-linkedin' ></i></a>
+					<a href="#" class="footer__link"><i class='bx bxl-github' ></i></a>
+					<a href="#" class="footer__link"><i class='bx bxl-instagram' ></i></a>
+				</div>
+				<p class="footer__scratch">Built from scratch with Love ;) </p>
+				<p class="footer__copy">&#169; 2023 RMC. All Rights Reserved</p>
+			</div>
+		</footer>
+        
+        <!-- MixitUp Filter -->
+		<script src = "{% static 'JavaScript/mixitup.min.js' %}"></script>
+
+		<!-- Swiper JS -->
+		<script src = ""></script>
+
+		<!-- GSAP -->
+		<script src = "{% static 'JavaScript/gsap.min.js' %}"></script>
+
+		<!-- Main JS -->
+		<script src = "{% static 'JavaScript/main.js' %}"></script>
+
+	</body>
 </html>
