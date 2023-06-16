@@ -528,11 +528,13 @@ img{
     align-content: space-around;
     row-gap: 2rem;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
-    align-items: flex-start;
+    align-items: flex-start; 
     display: grid;
     grid-template-columns: 1fr 1fr; /* Two equal-width columns */
     gap: 1rem; /* Gap between the columns */
+
 }
 
 .result__data {
@@ -673,10 +675,11 @@ img{
   }
 
 .search-section {
-    position: sticky;
-    top: 0;
-    background-color: transparent;
-    z-index: 1;
+    position: relative;
+    align-items: flex-start;
+    height: auto;
+    margin-top: 4rem;
+    margin-bottom: 0rem;
 }
 
 /* Buttons */
