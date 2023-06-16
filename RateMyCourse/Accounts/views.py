@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.forms.utils import ErrorList
 from django.contrib.auth.forms import UserCreationForm
 from django.http import JsonResponse
+from django.contrib.auth import authenticate, login
 
 # Create your views here.
 def signup(request):
@@ -33,4 +34,17 @@ def signup(request):
         return render(request, 'index.html')
 
 def login(request):
-    return render(request, 'index.html')
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            # User is authenticated, log them in
+            login(request, user)
+            return redirect('/')
+        else:
+            # Authentication failed, handle the error
+            messages.error(request, 'Invalid email or password')
+            return redirect('/')
+    else:
+        return render(request, 'index.html')
