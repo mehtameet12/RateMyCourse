@@ -226,6 +226,7 @@ img{
     background-color: var(--first-color-light);
 }
 
+
 /* Sign-Up and Log-In */
 
 .modal {
@@ -598,6 +599,12 @@ img{
     color: var(--first-color-lighten);
 }
 
+.ratings__subtitle{
+    font-size: var(--normal-font-size);
+    font-weight: bold;
+    color: var(--first-color-lighten);
+}
+
 .ratings__stars {
     font-size: var(--h1-font-size);
     color: var(--first-color-ratings);
@@ -664,7 +671,14 @@ img{
   .input-group label {
     margin-bottom: 5px;
   }
-  
+
+.search-section {
+    position: sticky;
+    top: 0;
+    background-color: transparent;
+    z-index: 1;
+}
+
 /* Buttons */
 .button{
     display: inline-block;
