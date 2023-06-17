@@ -5,6 +5,9 @@ from django.forms.utils import ErrorList
 from django.contrib.auth.forms import UserCreationForm
 from django.http import JsonResponse
 from django.contrib.auth import authenticate, login
+from django.http import JsonResponse
+
+
 
 # Create your views here.
 def signup(request):
