@@ -38,7 +38,16 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
+
+SITE_ID = 1
+
+LOGIN_REDIRECT_URL = '/'
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -83,6 +92,24 @@ DATABASES = {
         'HOST': 'localhost'
     }
 }
+
+AUTHENTICATION_BACKENDS = (
+    # Other authentication backends...
+    
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+    
+    # Other authentication backends...
+
+
+)
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '135601507528-6ncmlepm3gepnnitvgm84irvovai376r.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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' 
+SOCIALACCOUNT_LOGIN_ON_GET = True
 
 
 # Password validation
