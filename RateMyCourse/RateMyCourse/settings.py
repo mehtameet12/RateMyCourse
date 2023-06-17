@@ -101,7 +101,7 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
     
     # Other authentication backends...
-    'social_core.backends.google.GoogleOAuth2',
+
 
 )
 
