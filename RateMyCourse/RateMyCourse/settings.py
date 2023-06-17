@@ -91,7 +91,7 @@ DATABASES = {
     }
 }
 
-AUTHENTICATION_BACKENDS = [
+AUTHENTICATION_BACKENDS = (
     # Other authentication backends...
     
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -101,9 +101,13 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
     
     # Other authentication backends...
+    'social_core.backends.google.GoogleOAuth2',
 
-]
+)
 
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '135601507528-6ncmlepm3gepnnitvgm84irvovai376r.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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' 
+SOCIALACCOUNT_LOGIN_ON_GET = True
 
 
 # Password validation

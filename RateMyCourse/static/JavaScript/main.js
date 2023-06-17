@@ -109,8 +109,3 @@ function closeModal() {
 /* Home Annimation */
 document.querySelector('.home').classList.add('show');
 document.querySelector('.result').classList.add('show');
-
-/* login-redirect */
-function redirectToGoogle() {
-    window.location.href = "/accounts/login";
-}
