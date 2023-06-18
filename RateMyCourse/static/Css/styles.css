@@ -15,6 +15,9 @@
     --first-color-lighten: #fbf9f9;
     --first-color-lighten2:#adadad;
     --first-color-ratings: #13b5f0;
+    --first-color-card: #fbf9f9;
+    --first-color-cardTags: #0b305f;
+    --first-color-cardHighlights: #e6f32d;
 
     /* Font and Typography */
 
@@ -506,6 +509,7 @@ img{
   
 .result_backdrop-container {
     background-color: #000;
+    margin: 0;
 }
   
 .result.show {
@@ -535,7 +539,6 @@ img{
     display: grid;
     grid-template-columns: 1fr 1fr; /* Two equal-width columns */
     gap: 1rem; /* Gap between the columns */
-
 }
 
 .result__data {
@@ -635,7 +638,6 @@ img{
     overflow: hidden;
     margin-bottom: 0.5rem;
     position: relative;
-
 }
 
 .graph__bar {
@@ -657,8 +659,52 @@ img{
 
 /* Card Styles */
 .card {
+    background-color: var(--first-color-card);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: var(--mb-2);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    font-weight: var(--font-bold);
+    font-size: var(--h3-font-size);
+}
+.difficulty {
 
 }
+.highlighted-number {
+    background-color: var(--first-color-cardHighlights);
+    padding: 2px 4px;
+    border-radius: 4px;
+    margin-right: var(--mb-3);
+}
+
+.course-code {
+
+}
+
+.card-subheader {
+    margin-top: var(--mb-1);
+    display: flex;
+    justify-content: space-between;
+}
+
+.tag {
+    margin-right: var(--mb-2);
+    padding: 4px 8px;
+    background-color: var(--first-color-cardTags);
+    border-radius: 4px;
+    font-size: var(--normal-font-size);
+    color: var(--first-color-lighten); 
+}
+
+.card-body {
+    margin-top: var(--mb-2);
+    font-size: var(--normal-font-size);
+}
+
 
 /* Search Form */
 .search-form {
@@ -666,28 +712,28 @@ img{
     align-items: center;
     justify-content: center;
     gap: 10px;
-  }
+}
   
-  .search-form input[type="text"] {
+.search-form input[type="text"] {
     border: 2px solid var(--first-color-lighten2);
     border-radius: 10px;
     padding: 10px;
     font-size: var(--normal-font-size);
     width: 300px;
-  }
-  
-  .search-form input[type="text"]:focus {
+}
+
+.search-form input[type="text"]:focus {
     outline: none;
     border-color: var(--first-color);
-  }
-  .input-group{
+}
+.input-group{
     display: flex;
     flex-direction: column;
     margin-bottom: 5px;
-  }
-  .input-group label {
+}
+.input-group label {
     margin-bottom: 5px;
-  }
+}
 
 .search-section {
     position: relative;
