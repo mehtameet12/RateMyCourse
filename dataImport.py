@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 import csv
+import re
+
 
 urls = [
   'http://catalogue.uottawa.ca/en/courses/cpt/',
@@ -49,132 +51,77 @@ urls = [
   'http://catalogue.uottawa.ca/en/courses/dhn/',
   'http://catalogue.uottawa.ca/en/courses/dti/',
   'http://catalogue.uottawa.ca/en/courses/thd/',
-  'http://catalogue.uottawa.ca/en/courses/eco/',
-  'http://catalogue.uottawa.ca/en/courses/edu/',
-  'http://catalogue.uottawa.ca/en/courses/ped/',
+  'http://catalogue.uottawa.ca/en/courses/eas/',
+  'http://catalogue.uottawa.ca/en/courses/ecc/',
+  'http://catalogue.uottawa.ca/en/courses/ees/',
   'http://catalogue.uottawa.ca/en/courses/ele/',
-  'http://catalogue.uottawa.ca/en/courses/elg/',
-  'http://catalogue.uottawa.ca/en/courses/cgi/',
-  'http://catalogue.uottawa.ca/en/courses/sed/',
-  'http://catalogue.uottawa.ca/en/courses/emp/',
+  'http://catalogue.uottawa.ca/en/courses/epd/',
+  'http://catalogue.uottawa.ca/en/courses/ecm/',
+  'http://catalogue.uottawa.ca/en/courses/efs/',
+  'http://catalogue.uottawa.ca/en/courses/egs/',
+  'http://catalogue.uottawa.ca/en/courses/egm/',
+  'http://catalogue.uottawa.ca/en/courses/egi/',
+  'http://catalogue.uottawa.ca/en/courses/egy/',
+  'http://catalogue.uottawa.ca/en/courses/che/',
+  'http://catalogue.uottawa.ca/en/courses/sve/',
   'http://catalogue.uottawa.ca/en/courses/eng/',
-  'http://catalogue.uottawa.ca/en/courses/esl/',
-  'http://catalogue.uottawa.ca/en/courses/eed/',
-  'http://catalogue.uottawa.ca/en/courses/evg/',
-  'http://catalogue.uottawa.ca/en/courses/evs/',
-  'http://catalogue.uottawa.ca/en/courses/env/',
-  'http://catalogue.uottawa.ca/en/courses/evd/',
-  'http://catalogue.uottawa.ca/en/courses/epi/',
-  'http://catalogue.uottawa.ca/en/courses/fam/',
-  'http://catalogue.uottawa.ca/en/courses/fem/',
-  'http://catalogue.uottawa.ca/en/courses/cin/',
-  'http://catalogue.uottawa.ca/en/courses/nut/',
-  'http://catalogue.uottawa.ca/en/courses/efr/',
-  'http://catalogue.uottawa.ca/en/courses/fls/',
-  'http://catalogue.uottawa.ca/en/courses/iai/',
-  'http://catalogue.uottawa.ca/en/courses/ahl/',
-  'http://catalogue.uottawa.ca/en/courses/dvm/',
-  'http://catalogue.uottawa.ca/en/courses/sai/',
+  'http://catalogue.uottawa.ca/en/courses/fra/',
+  'http://catalogue.uottawa.ca/en/courses/fys/',
+  'http://catalogue.uottawa.ca/en/courses/gen/',
+  'http://catalogue.uottawa.ca/en/courses/geo/',
+  'http://catalogue.uottawa.ca/en/courses/ger/',
+  'http://catalogue.uottawa.ca/en/courses/gsm/',
+  'http://catalogue.uottawa.ca/en/courses/his/',
+  'http://catalogue.uottawa.ca/en/courses/hps/',
+  'http://catalogue.uottawa.ca/en/courses/hss/',
+  'http://catalogue.uottawa.ca/en/courses/ise/',
+  'http://catalogue.uottawa.ca/en/courses/ins/',
   'http://catalogue.uottawa.ca/en/courses/ita/',
   'http://catalogue.uottawa.ca/en/courses/jpn/',
-  'http://catalogue.uottawa.ca/en/courses/jou/',
-  'http://catalogue.uottawa.ca/en/courses/fre/',
-  'http://catalogue.uottawa.ca/en/courses/gae/',
-  'http://catalogue.uottawa.ca/en/courses/gng/',
-  'http://catalogue.uottawa.ca/en/courses/gsu/',
-  'http://catalogue.uottawa.ca/en/courses/geg/',
   'http://catalogue.uottawa.ca/en/courses/geo/',
-  'http://catalogue.uottawa.ca/en/courses/alg/',
-  'http://catalogue.uottawa.ca/en/courses/ela/',
-  'http://catalogue.uottawa.ca/en/courses/dcc/',
-  'http://catalogue.uottawa.ca/en/courses/dcl/',
-  'http://catalogue.uottawa.ca/en/courses/lsr/',
-  'http://catalogue.uottawa.ca/en/courses/fra/',
-  'http://catalogue.uottawa.ca/en/courses/lin/',
-  'http://catalogue.uottawa.ca/en/courses/alg/',
-  'http://catalogue.uottawa.ca/en/courses/grt/',
-  'http://catalogue.uottawa.ca/en/courses/mgt/',
-  'http://catalogue.uottawa.ca/en/courses/thm/',
-  'http://catalogue.uottawa.ca/en/courses/mat/',
-  'http://catalogue.uottawa.ca/en/courses/mba/',
-  'http://catalogue.uottawa.ca/en/courses/mcg/',
-  'http://catalogue.uottawa.ca/en/courses/inr/',
-  'http://catalogue.uottawa.ca/en/courses/med/',
-  'http://catalogue.uottawa.ca/en/courses/pcs/',
-  'http://catalogue.uottawa.ca/en/courses/mdv/',
-  'http://catalogue.uottawa.ca/en/courses/mic/',
   'http://catalogue.uottawa.ca/en/courses/llm/',
+  'http://catalogue.uottawa.ca/en/courses/mas/',
+  'http://catalogue.uottawa.ca/en/courses/mat/',
+  'http://catalogue.uottawa.ca/en/courses/mbi/',
+  'http://catalogue.uottawa.ca/en/courses/mic/',
+  'http://catalogue.uottawa.ca/en/courses/mne/',
+  'http://catalogue.uottawa.ca/en/courses/mpi/',
+  'http://catalogue.uottawa.ca/en/courses/mtg/',
   'http://catalogue.uottawa.ca/en/courses/mus/',
-  'http://catalogue.uottawa.ca/en/courses/ila/',
-  'http://catalogue.uottawa.ca/en/courses/hah/',
-  'http://catalogue.uottawa.ca/en/courses/mha/',
-  'http://catalogue.uottawa.ca/en/courses/hss/',
-  'http://catalogue.uottawa.ca/en/courses/mhs/',
-  'http://catalogue.uottawa.ca/en/courses/his/',
-  'http://catalogue.uottawa.ca/en/courses/hmg/',
-  'http://catalogue.uottawa.ca/en/courses/apa/',
-  'http://catalogue.uottawa.ca/en/courses/imm/',
-  'http://catalogue.uottawa.ca/en/courses/ila/',
-  'http://catalogue.uottawa.ca/en/courses/isi/',
-  'http://catalogue.uottawa.ca/en/courses/obg/',
-  'http://catalogue.uottawa.ca/en/courses/iti/',
-  'http://catalogue.uottawa.ca/en/courses/nap/',
-  'http://catalogue.uottawa.ca/en/courses/nsc/',
-  'http://catalogue.uottawa.ca/en/courses/not/',
-  'http://catalogue.uottawa.ca/en/courses/nsg/',
-   "http://catalogue.uottawa.ca/en/courses/obg/",
-"http://catalogue.uottawa.ca/en/courses/erg/",
-    "http://catalogue.uottawa.ca/en/courses/omt/",
-    "http://catalogue.uottawa.ca/en/courses/oph/",
-    "http://catalogue.uottawa.ca/en/courses/ort/",
-    "http://catalogue.uottawa.ca/en/courses/pme/",
-    "http://catalogue.uottawa.ca/en/courses/scs/",
-    "http://catalogue.uottawa.ca/en/courses/sss/",
-    "http://catalogue.uottawa.ca/en/courses/svs/",
-    "http://catalogue.uottawa.ca/en/courses/soc/",
-    "http://catalogue.uottawa.ca/en/courses/seg/",
-    "http://catalogue.uottawa.ca/en/courses/esp/",
-    "http://catalogue.uottawa.ca/en/courses/ora/",
-    "http://catalogue.uottawa.ca/en/courses/sys/",
-    "http://catalogue.uottawa.ca/en/courses/the/",
-    "http://catalogue.uottawa.ca/en/courses/tra/",
-    "http://catalogue.uottawa.ca/en/courses/tmm/",
-    "http://catalogue.uottawa.ca/en/courses/pae/",
-    "http://catalogue.uottawa.ca/en/courses/pha/",
-    "http://catalogue.uottawa.ca/en/courses/phi/",
-    "http://catalogue.uottawa.ca/en/courses/phy/",
-    "http://catalogue.uottawa.ca/en/courses/phs/",
-    "http://catalogue.uottawa.ca/en/courses/pht/",
-    "http://catalogue.uottawa.ca/en/courses/pln/",
-    "http://catalogue.uottawa.ca/en/courses/pol/",
-    "http://catalogue.uottawa.ca/en/courses/pop/",
-    "http://catalogue.uottawa.ca/en/courses/phr/",
-    "http://catalogue.uottawa.ca/en/courses/por/",
-    "http://catalogue.uottawa.ca/en/courses/pip/",
-    "http://catalogue.uottawa.ca/en/courses/art/",
-    "http://catalogue.uottawa.ca/en/courses/psy/",
-    "http://catalogue.uottawa.ca/en/courses/pct/",
-    "http://catalogue.uottawa.ca/en/courses/pap/",
-    "http://catalogue.uottawa.ca/en/courses/api/",
-    "http://catalogue.uottawa.ca/en/courses/pbh/",
-    "http://catalogue.uottawa.ca/en/courses/rad/",
-    "http://catalogue.uottawa.ca/en/courses/rea/",
-    "http://catalogue.uottawa.ca/en/courses/srs/",
-    "http://catalogue.uottawa.ca/en/courses/rch/",
-    "http://catalogue.uottawa.ca/en/courses/rus/",
-    "http://catalogue.uottawa.ca/en/courses/sci/",
-    "http://catalogue.uottawa.ca/en/courses/isp/",
-    "http://catalogue.uottawa.ca/en/courses/dls/",
-    "http://catalogue.uottawa.ca/en/courses/fss/",
-    "http://catalogue.uottawa.ca/en/courses/lcm/",
-    "http://catalogue.uottawa.ca/en/courses/ydd/",
-    "http://catalogue.uottawa.ca/en/courses/glo/",
-    "http://catalogue.uottawa.ca/en/courses/uro/",
-    "http://catalogue.uottawa.ca/en/courses/jcs/"
+  'http://catalogue.uottawa.ca/en/courses/neu/',
+  'http://catalogue.uottawa.ca/en/courses/nur/',
+  'http://catalogue.uottawa.ca/en/courses/phi/',
+  'http://catalogue.uottawa.ca/en/courses/phy/',
+  'http://catalogue.uottawa.ca/en/courses/pcs/',
+  'http://catalogue.uottawa.ca/en/courses/pmp/',
+  'http://catalogue.uottawa.ca/en/courses/pap/',
+  'http://catalogue.uottawa.ca/en/courses/psc/',
+  'http://catalogue.uottawa.ca/en/courses/psy/',
+  'http://catalogue.uottawa.ca/en/courses/pub/',
+  'http://catalogue.uottawa.ca/en/courses/rel/',
+  'http://catalogue.uottawa.ca/en/courses/sab/',
+  'http://catalogue.uottawa.ca/en/courses/sdp/',
+  'http://catalogue.uottawa.ca/en/courses/soc/',
+  'http://catalogue.uottawa.ca/en/courses/sps/',
+  'http://catalogue.uottawa.ca/en/courses/slh/',
+  'http://catalogue.uottawa.ca/en/courses/spa/',
+  'http://catalogue.uottawa.ca/en/courses/spm/',
+  'http://catalogue.uottawa.ca/en/courses/sta/',
+  'http://catalogue.uottawa.ca/en/courses/chi/',
+  'http://catalogue.uottawa.ca/en/courses/ces/',
+  'http://catalogue.uottawa.ca/en/courses/syu/',
+  'http://catalogue.uottawa.ca/en/courses/tmm/',
+  'http://catalogue.uottawa.ca/en/courses/the/',
+  'http://catalogue.uottawa.ca/en/courses/tpd/',
+  'http://catalogue.uottawa.ca/en/courses/tur/',
+  'http://catalogue.uottawa.ca/en/courses/ukr/',
+  'http://catalogue.uottawa.ca/en/courses/vpm/',
+  'http://catalogue.uottawa.ca/en/courses/zoo/'
 ]
 
 # Create a list to store the extracted data
 data = []
+
 for url in urls:
     # Send a GET request to the webpage
     response = requests.get(url)
@@ -189,18 +136,24 @@ for url in urls:
     for course_element in course_elements:
         course_code_element = course_element.find("p", class_="courseblocktitle noindent")
         course_description_element = course_element.find("p", class_="courseblockdesc noindent")
-        
+
         # Check if the elements exist before accessing their text attribute
         if course_code_element is not None and course_description_element is not None:
             course_code = course_code_element.text.strip()
-            course_description = course_description_element.text.strip()
-            data.append([course_code, course_description])
+
+            # Clean the course code
+            cleaned_code = re.sub(r'\([^)]*\)', '', course_code)
+            cleaned_code = re.sub(r'([A-Z]{3})(\d{4})', r'\1,\2', cleaned_code)
+            cleaned_code = re.sub(r'(\d{4})', r'\1,', cleaned_code)
+
+            # Add the cleaned course code to the data list
+            data.append([cleaned_code])
 
 # Save the data as a CSV file
 filename = "course_data.csv"
 with open(filename, "w", newline="") as csvfile:
     writer = csv.writer(csvfile)
-    writer.writerow(["Course Code", "Course Description"])
     writer.writerows(data)
 
 print("CSV file saved successfully!")
+
