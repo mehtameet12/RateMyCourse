@@ -1,4 +1,6 @@
 {%load static%}
+{% load socialaccount %}
+{% providers_media_js %}
 <!DOCTYPE html>
 <html lang ="en">
 
@@ -34,7 +36,7 @@
                 <div class="nav__menu" id="nav-menu">
                     <ul class="nav__list">
                         <li class="nav__item">
-                            <a href="#" class="nav__link active-link" onclick="openLoginModal()">Log In</a>
+                            <a href="#" class="nav__link" onclick="openLoginModal()">Log In</a>
                         </li>
                         <li class="nav__item">
                             <a href="#" class="nav__link" onclick="openSignupModal()">Sign Up</a>
@@ -52,10 +54,10 @@
             <div class="modal-content">
                 <span class="close-modal" onclick="closeModal()">&times;</span>
                 <h2>Login</h2>
-                <button class="google-login">
+                <a class="google-login" href="{% provider_login_url 'google' %}">
                     <i class='bx bxl-google'></i>
                     <span class="google-text">Login with Google</span>
-                </button>
+                </a>
                 <div class = "divider"></div>
                     <label for="subject-code">  Or login with email  </label>
                 <form class="login-form" metod = "post" action="login/">
@@ -74,10 +76,10 @@
             <div class="modal-content">
                 <span class="close-modal" onclick="closeModal()">&times;</span>
                 <h2>Sign Up</h2>
-                <button class="google-login">
+                <a class="google-login" href="{% provider_login_url 'google' %}">
                     <i class='bx bxl-google'></i>
                     <span class="google-text">Sign Up with Google</span>
-                </button>
+                </a>
                 <div class = "divider"></div>
                     <label for="subject-code">  Or sign up with username  </label>
                 <form class = "signup-form" method ="post" action="signup/">
@@ -107,48 +109,92 @@
 
             <!-- RESULT -->
             <section class="result_backdrop-container">
-                <section class="result" id="result">
+                <div class="result" id="result">
 
-                    <div class="search-section bd-container bd-grid">
-                        <form class="search-form" action="/search" method="GET">
-                            <div class = "input-group">
-                                <label for="subject-code">Enter subject code:</label>
-                                <input type="text" id="subject-code" name="query" placeholder="Eg. SEG">
-                            </div>
-                            <div class = "input-group">
-                                <label for="course-code">Enter course code:</label>
-                                <input type="text" id="course-code" name="query" placeholder="Eg. 3125">
-                            </div>
-                        </form>
-                    </div>
+                    <div class = "fullresult bd-container">
+ 
+                        <!-- Search Boxes -->
+                        <div class = "result__data ">
+                            <div class="search-section">
+                                <form class="search-form" action="/search" method="GET">
+                                    <div class = "input-group">
+                                        <label for="subject-code">Enter subject code:</label>
+                                        <input type="text" id="subject-code" name="query" placeholder="Eg. SEG">
+                                    </div>
+                                    <div class = "input-group">
+                                        <label for="course-code">Enter course code:</label>
+                                        <input type="text" id="course-code" name="query" placeholder="Eg. 3125">
+                                    </div>
+                                </form>
+                            </div>    
+                        </div>
 
-                  <div class="result__container bd-container bd-grid">
-                    <div class="ratings">
-                      <h2 class="ratings__title">Course Code</h2>
-                      <h3 class="ratings__subtitle">Course Name</h3>
-                      <div class="ratings__stars" id="star-rating">
-                        <span class="star">&#9733;</span>
-                        <span class="star">&#9733;</span>
-                        <span class="star">&#9733;</span>
-                        <span class="star">&#9733;</span>
-                        <span class="star">&#9733;</span>
-                      </div>
-                      <h3 class="ratings__difficulty">Difficulty: Intermediate</h3>
+                        <!-- Results -->
+                        <div class="result__container">
+                            <!-- Ratings -->    
+                            <div class="ratings">
+                                <h2 class="ratings__title">Course Code</h2>
+                                <h3 class="ratings__subtitle">Course Name</h3>
+                                <div class="ratings__stars" id="star-rating">
+                                    <span class="star">&#9733;</span>
+                                    <span class="star">&#9733;</span>
+                                    <span class="star">&#9733;</span>
+                                    <span class="star">&#9733;</span>
+                                    <span class="star">&#9733;</span>
+                                </div>
+                                <h3 class="ratings__difficulty">Difficulty: Intermediate</h3>
+                            </div>
+                            
+                            <!-- Graph -->
+                            <div class = "graphDetails">
+                                <div class="graph">
+                                    <div class="graph__label">Enroll if Available</div>
+                                    <div class="graph__bar" style="width: 50%;"></div>
+                                </div>
+                                <div class="graph">
+                                    <div class="graph__label">Easy</div>
+                                    <div class="graph__bar" style="width: 10%;"></div>
+                                </div>
+                                <div class="graph">
+                                    <div class="graph__label">Hmm..So So</div>
+                                    <div class="graph__bar" style="width: 5%;"></div>
+                                </div>
+                                <div class="graph">
+                                    <div class="graph__label">Try A Different One</div>
+                                    <div class="graph__bar" style="width: 20%;"></div>
+                                </div>
+                                <div class="graph">
+                                    <div class="graph__label">Avoid At All Costs</div>
+                                    <div class="graph__bar" style="width: 15%;"></div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <!-- Card -->
+                        <div class="card">
+                            <div class="card-header">
+                                <span class="difficulty">Difficulty: </span>
+                                <span class="highlighted-number">3</span>
+                                <span class="course-code">Course Code: XXX YYYY</span>
+                            </div>
+                            <div class="card-subheader">
+                            <span class="tag">For Credit: XX</span>
+                            <span class="tag">Grade: XX</span>
+                            <span class="tag">Prof Name: XX</span>
+                            <span class="tag">Textbook Required: XX</span>
+                            <span class="tag">Would Take Again: XX</span>
+                            </div>
+                            <div class="card-body">
+                            <p>blaehbfiewubfboweufnwefewfewfewfewewfkjnwnvw;vwc</p>
+                            <p>blaehbfiewubfboweufnwefewfewfewfewewfkjnwnvw;vwc</p>
+                            <p>blaehbfiewubfboweufnwefewfewfewfewewfkjnwnvw;vwc</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class = "graphDetails">
-                        <div class="graph">
-                            <div class="graph__bar" style="width: 50%;"></div>
-                          </div>
-                    </div>
-                    
-                    <div class="card">
-                      <!-- Card content goes here -->
-                    </div>
-                  </div>
-                </section>
-              </section>
+                </div>
+            </section>
         </main>
-          
         
         <!-- Footer -->
 		<footer class="footer">

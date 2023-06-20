@@ -15,6 +15,9 @@
     --first-color-lighten: #fbf9f9;
     --first-color-lighten2:#adadad;
     --first-color-ratings: #13b5f0;
+    --first-color-card: #fbf9f9;
+    --first-color-cardTags: #0b305f;
+    --first-color-cardHighlights: #e6f32d;
 
     /* Font and Typography */
 
@@ -494,17 +497,41 @@ img{
 }
 
 /* Results Page */
-.result{
+
+
+.result_backdrop-container {
     overflow: hidden;
     background-image: url('ResultsBackground.png');
     background-size: cover;
     background-position: center;
     opacity: 1;
     transition: opacity 1s ease-in-out;
-}
-  
-.result_backdrop-container {
+    margin-top: 2.9rem;
     background-color: #000;
+}
+
+.result{
+    /* overflow: hidden;
+    background-image: url('ResultsBackground.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+    margin-top: 2.9rem;
+    background-color: #000; */
+}
+
+.fullresult {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+}
+
+.result__data,
+.result__container,
+.card {
+    flex: 1; /* Distribute available space equally */
 }
   
 .result.show {
@@ -528,20 +555,22 @@ img{
     align-content: space-around;
     row-gap: 2rem;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    align-items: flex-start; 
+    align-items: flex-start;
+    /* justify-content: center; */
     display: grid;
     grid-template-columns: 1fr 1fr; /* Two equal-width columns */
     gap: 1rem; /* Gap between the columns */
-
+    margin-bottom: 10rem;
+    margin-top: var(--mb-3);
 }
 
 .result__data {
     color: var(--first-color-lighten);
-    padding-left: 1.5rem;
     z-index: var(--z-tooltip);
     text-align: center;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
 }
 
 .result__greeting,
@@ -632,17 +661,79 @@ img{
     background-color: var(--first-color-lighten);
     border-radius: 5px;
     overflow: hidden;
+    margin-bottom: 0.5rem;
+    position: relative;
 }
 
 .graph__bar {
     height: 100%;
     background-color: var(--first-color-ratings);
     transition: width 0.5s ease-in-out;
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
+
+.graph__label {
+    margin-left: .75rem;
+    position: relative;
+    z-index: 1;
+    font-size: var(--normal-font-size)
+}
+
 
 /* Card Styles */
 .card {
+    background-color: var(--first-color-card);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: var(--mb-2);
+  
+    /* display: flex; */
+    /* flex-direction: column; */
+    justify-content: center;
+    z-index: var(--z-tooltip);
+    margin-bottom: var(--mb-3);
+}
 
+.card-header {
+    display: flex;
+    align-items: center;
+    font-weight: var(--font-bold);
+    font-size: var(--h3-font-size);
+}
+.difficulty {
+
+}
+.highlighted-number {
+    background-color: var(--first-color-cardHighlights);
+    padding: 2px 4px;
+    border-radius: 4px;
+    margin-right: var(--mb-3);
+}
+
+.course-code {
+
+}
+
+.card-subheader {
+    margin-top: var(--mb-1);
+    display: flex;
+    justify-content: space-between;
+}
+
+.tag {
+    margin-right: var(--mb-2);
+    padding: 4px 8px;
+    background-color: var(--first-color-cardTags);
+    border-radius: 4px;
+    font-size: var(--normal-font-size);
+    color: var(--first-color-lighten); 
+}
+
+.card-body {
+    margin-top: var(--mb-2);
+    font-size: var(--normal-font-size);
 }
 
 /* Search Form */
@@ -651,34 +742,34 @@ img{
     align-items: center;
     justify-content: center;
     gap: 10px;
-  }
+}
   
-  .search-form input[type="text"] {
+.search-form input[type="text"] {
     border: 2px solid var(--first-color-lighten2);
     border-radius: 10px;
     padding: 10px;
     font-size: var(--normal-font-size);
     width: 300px;
-  }
-  
-  .search-form input[type="text"]:focus {
+}
+
+.search-form input[type="text"]:focus {
     outline: none;
     border-color: var(--first-color);
-  }
-  .input-group{
+}
+.input-group{
     display: flex;
     flex-direction: column;
     margin-bottom: 5px;
-  }
-  .input-group label {
+}
+.input-group label {
     margin-bottom: 5px;
-  }
+}
 
 .search-section {
-    position: relative;
+    position: absolute;
     align-items: flex-start;
     height: auto;
-    margin-top: 4rem;
+    margin-top: 2rem;
     margin-bottom: 0rem;
 }
 
