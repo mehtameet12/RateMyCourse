@@ -27,24 +27,21 @@ def run():
             
             if row:
                 # Extract the course code, course number, and course name from the row
-                row_parts = row[0].split(' ', 1)  # Split on the first space only
+                course_parts = row[0].split(',"')  # Split on ',"' to separate the description
                 
-                if len(row_parts) > 1:
+                if len(course_parts) > 1:
                     # Extract the course code
-                    course_code = row_parts[0].strip(' "')
+                    course_code = course_parts[1].split()[0]
                     
                     # Extract the course number
-                    course_number = row_parts[1].strip()
+                    course_number = course_parts[1].split()[1]
                     
-                    if len(course_number) > 4:
-                        # Extract the course name if it exists
-                        course_name = course_number[4:].strip()
-                        course_number = course_number[:4]  # Update course number without the name
+                    # Extract the course name without units
+                    course_name = course_parts[0].strip('"')
                         
             # Create the Course object if all required data is available
             if course_code and course_number and course_name:
                 course = Course.objects.create(course_code=course_code, course_number=course_number, course_name=course_name)
-                print(f"Created Course object: {course}")
+                print(f"Created Course object: {course.course_code},{course.course_number},{course.course_name.split('(')[0].strip()}")
             else:
                 print(f"Skipped invalid data: {row}")
-
