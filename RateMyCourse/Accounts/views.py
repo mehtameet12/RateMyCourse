@@ -23,7 +23,7 @@ def signup(request):
             messages.error(request, 'Username already taken')
             return redirect('/')
         elif User.objects.filter(email=email).exists():
-            messages.error(request, 'You already have an account with us, please Log In instead')
+            messages.error(request, 'Welcome back, please LogIn')
             return redirect('/')
         elif password1!=password2:
             messages.error(request, 'Passwords do not match! Please try again!')
@@ -40,14 +40,17 @@ def login(request):
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
-        user = authenticate(request, email=email, password=password)
+        user = auth.authenticate(email=email, password=password)
+        print(user)
         if user is not None:
             # User is authenticated, log them in
-            login(request, user)
+            auth.login(request, user)
+            print('Logged In')
             return redirect('/')
         else:
             # Authentication failed, handle the error
-            messages.error(request, 'Invalid email or password')
+            messages.info(request, 'Invalid email or password')
+            print('Error, try again')
             return redirect('/')
     else:
         return render(request, 'index.html')
