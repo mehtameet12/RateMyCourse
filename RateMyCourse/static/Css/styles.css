@@ -706,7 +706,7 @@ img{
 
 }
 .highlighted-number {
-    background-color: var(--first-color-cardHighlights);
+    /* background-color: var(--first-color-cardHighlights); */
     padding: 2px 4px;
     border-radius: 4px;
     margin-right: var(--mb-3);
