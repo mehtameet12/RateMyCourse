@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 import re
+import urllib.request
 
 
 urls = [
@@ -141,12 +142,21 @@ for url in urls:
         if course_code_element is not None and course_description_element is not None:
             course_code = course_code_element.text.strip()
 
+
             # Clean the course code
             cleaned_code = re.sub(r'\([^)]*\)', '', course_code)
             cleaned_code = re.sub(r'([A-Z]{3})(\d{4})', r'\1,\2', cleaned_code)
             cleaned_code = re.sub(r'(\d{4})', r'\1,', cleaned_code)
 
             # Add the cleaned course code to the data list
+
+            cleaned_code = re.sub(r'\([^)]*\)', '', course_code)
+            cleaned_code = re.sub(r'\s+', ' ', cleaned_code)
+            cleaned_code = re.sub(r'([A-Z]{3})(\d{4})(\D)', r'\1,\2,\3', cleaned_code)
+            #cleaned_code = re.sub(r'([A-Z]{3})(\d{4})', r'\1,\2', cleaned_code)
+            # modified_row = [cell.replace('"', '') for cell in row]
+            cleaned_code = cleaned_code.replace('"', '')
+
             data.append([cleaned_code])
 
 # Save the data as a CSV file
@@ -155,5 +165,7 @@ with open(filename, "w", newline="") as csvfile:
     writer = csv.writer(csvfile)
     writer.writerows(data)
 
+
 print("CSV file saved successfully!")
+
 
