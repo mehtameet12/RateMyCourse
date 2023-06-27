@@ -208,6 +208,19 @@ img{
     cursor: pointer;
 }
 
+.nav__logout-link {
+    background-color: transparent;
+    border: none;
+    color: var(--first-color-lighten);
+    cursor: pointer;
+    transition: .3s;
+    font-size: var(--normal-font-size);
+}
+
+.nav__logout-link:hover {
+    color: var(--first-color);
+}
+
 /* Show Menu */
 .show-menu{
     top: var(--header-height);

@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.forms.utils import ErrorList
 from django.contrib.auth.forms import UserCreationForm
 from django.http import JsonResponse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
 
 
@@ -36,21 +36,44 @@ def signup(request):
     else:
         return render(request, 'index.html')
 
+# def login(request):
+#     if request.method == 'POST':
+#         username = request.POST['username']
+#         password = request.POST['password']
+#         user = auth.authenticate(username=username, password=password)
+#         print(user)
+#         if user is not None:
+#             # User is authenticated, log them in
+#             auth.login(request, user)
+#             print('Logged In')
+#             return redirect('/')
+#         else:
+#             # Authentication failed, handle the error
+#             messages.info(request, 'Invalid Username or password')
+#             print('Error, try again')
+#             return render (request, 'index.html', {'login_error': True})
+#     else:
+#         return render(request, 'index.html')
+
 def login(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        user = auth.authenticate(username=username, password=password)
-        print(user)
+        user = authenticate(username=username, password=password)
         if user is not None:
-            # User is authenticated, log them in
             auth.login(request, user)
-            print('Logged In')
+            messages.success(request, 'Logged In')
             return redirect('/')
         else:
-            # Authentication failed, handle the error
-            messages.info(request, 'Invalid username or password')
-            print('Error, try again')
-            return render (request, 'index.html', {'login_error': True})
+            messages.error(request, 'Invalid username or password')
+            return render(request, 'index.html', {'login_error': True})
     else:
-        return render(request, 'index.html')
+        if request.user.is_authenticated:
+            return render(request, 'index.html', {'user': request.user})
+        else:
+            return render(request, 'index.html')
+        
+def logout_view(request):
+    logout(request)
+    messages.success(request, 'Logged out successfully')
+    return redirect('/')
