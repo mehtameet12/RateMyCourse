@@ -1,12 +1,14 @@
+from http.client import HTTPResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.forms.utils import ErrorList
 from django.contrib.auth.forms import UserCreationForm
 from django.http import JsonResponse
-from django.contrib.auth import authenticate, login
-from django.http import JsonResponse
-
+from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponse
+import json
+from .forms import LoginForm
 
 
 # Create your views here.
@@ -23,7 +25,7 @@ def signup(request):
             messages.error(request, 'Username already taken')
             return redirect('/')
         elif User.objects.filter(email=email).exists():
-            messages.error(request, 'You already have an account with us, please Log In instead')
+            messages.error(request, 'Welcome back, please LogIn')
             return redirect('/')
         elif password1!=password2:
             messages.error(request, 'Passwords do not match! Please try again!')
@@ -38,16 +40,25 @@ def signup(request):
 
 def login(request):
     if request.method == 'POST':
-        email = request.POST['email']
+        username = request.POST['username']
         password = request.POST['password']
-        user = authenticate(request, email=email, password=password)
+        user = authenticate(username=username, password=password)
         if user is not None:
-            # User is authenticated, log them in
-            login(request, user)
+            auth.login(request, user)
+            messages.success(request, 'Logged In')
             return redirect('/')
         else:
-            # Authentication failed, handle the error
-            messages.error(request, 'Invalid email or password')
+            messages.error(request, 'Invalid username or password')
+            form = LoginForm()
             return redirect('/')
     else:
-        return render(request, 'index.html')
+        if request.user.is_authenticated:
+            return render(request, 'index.html', {'user': request.user})
+        else:
+            form = LoginForm()
+            return render(request, 'index.html')
+
+def logout_view(request):
+    logout(request)
+    messages.success(request, 'Logged out successfully')
+    return redirect('/')

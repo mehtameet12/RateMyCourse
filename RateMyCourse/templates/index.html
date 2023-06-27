@@ -29,18 +29,29 @@
 			<i class='bx bx-chevron-up scroll-top__icon' ></i>
 		</a>
 
-		<!-- Header -->
-		<header class="l-header" id="header">
+        <header class="l-header" id="header">
             <nav class="nav bd-container">
                 <a href="" class="nav__logo">Rate My Course</a>
                 <div class="nav__menu" id="nav-menu">
                     <ul class="nav__list">
-                        <li class="nav__item">
-                            <a href="#" class="nav__link" onclick="openLoginModal()">Log In</a>
-                        </li>
-                        <li class="nav__item">
-                            <a href="#" class="nav__link" onclick="openSignupModal()">Sign Up</a>
-                        </li>
+                        {% if user.is_authenticated %}
+                            <li class="nav__item">
+                                <a href="#" class="nav__link">Welcome {{ user.username }}</a>
+                            </li>
+                            <li class="nav__item">
+                                <form action="logout/" method="post" id="logout-form">
+                                    {% csrf_token %}
+                                    <button type="submit" class="nav__link nav__logout-link">Log Out</button>
+                                </form>
+                            </li>
+                        {% else %}
+                            <li class="nav__item">
+                                <a href="#" class="nav__link" onclick="openLoginModal()">Log In</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="#" class="nav__link" onclick="openSignupModal()">Sign Up</a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
                 <div class="nav__toggle" id="nav-toggle">
@@ -48,6 +59,7 @@
                 </div>
             </nav>
         </header>
+        
 
         <!-- Login Modal -->
         <div class="modal" id="loginModal">
@@ -59,10 +71,17 @@
                     <span class="google-text">Login with Google</span>
                 </a>
                 <div class = "divider"></div>
-                    <label for="subject-code">  Or login with email  </label>
-                <form class="login-form" metod = "post" action="login/">
-                    <input type="email" placeholder="Email">
-                    <input type="password" placeholder="Password">
+                    <label for="subject-code">  Or login with Username  </label>
+                <form class="login-form" method = "post" action="login/">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="name" name="username" placeholder="Username" required>
+                    <input type="password" name = "password" placeholder="Password" required>
+                    <div class="error-message">
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                    </div>
                     <button type="submit" class="continue-button" >Continue</button>
                     <button class="forgot-password">Forgot Password?</button>
                 </form>
@@ -70,6 +89,9 @@
                     <button class="signup-instead" onclick="setTimeout(() => { closeModal(); openSignupModal(); }, 200)">Sign Up Instead</button></span>
             </div>
         </div>
+
+
+        
         
         <!-- SignUp Modal -->
         <div class="modal" id="signupModal">
@@ -84,12 +106,12 @@
                     <label for="subject-code">  Or sign up with username  </label>
                 <form class = "signup-form" method ="post" action="signup/">
                     {% csrf_token %}
-                    <input type="name" name = "first_name" placeholder="First Name">
-                    <input type="name" name = "last_name" placeholder="Last Name">
-                    <input type="name" name = "username" placeholder="Username">
-                    <input type="email" name = "email" placeholder="Email">
-                    <input type="password" name = "password1" placeholder="Password">
-                    <input type="password" name = "password2" placeholder="Confirm Password">
+                    <input type="name" name = "first_name" placeholder="First Name" required>
+                    <input type="name" name = "last_name" placeholder="Last Name" required>
+                    <input type="name" name = "username" placeholder="Username" required>
+                    <input type="email" name = "email" placeholder="Email" required>
+                    <input type="password" name = "password1" placeholder="Password" required>
+                    <input type="password" name = "password2" placeholder="Confirm Password" required>
                     <div class="error-message">
                         {% for message in messages %}
                             {{ message }}
