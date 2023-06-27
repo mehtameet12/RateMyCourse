@@ -353,7 +353,7 @@ img{
     gap: 10px;
 }
   
-.login-form input[type="email"], 
+.login-form input[type="name"], 
 .login-form input[type="password"]{
     border: 2px solid var(--first-color-lighten2);
     border-radius: 10px;
@@ -362,7 +362,7 @@ img{
     width: 300px;
 }
 
-.login-form input[type="email"]:focus, 
+.login-form input[type="name"]:focus, 
 .login-form input[type="password"]:focus {
     outline: none;
     border-color: var(--first-color);

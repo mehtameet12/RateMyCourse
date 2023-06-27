@@ -38,9 +38,9 @@ def signup(request):
 
 def login(request):
     if request.method == 'POST':
-        email = request.POST['email']
+        username = request.POST['username']
         password = request.POST['password']
-        user = auth.authenticate(email=email, password=password)
+        user = auth.authenticate(username=username, password=password)
         print(user)
         if user is not None:
             # User is authenticated, log them in
@@ -49,8 +49,8 @@ def login(request):
             return redirect('/')
         else:
             # Authentication failed, handle the error
-            messages.info(request, 'Invalid email or password')
+            messages.info(request, 'Invalid username or password')
             print('Error, try again')
-            return redirect('/')
+            return render (request, 'index.html', {'login_error': True})
     else:
         return render(request, 'index.html')
