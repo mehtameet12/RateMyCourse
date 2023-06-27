@@ -8,6 +8,7 @@ from django.http import JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 import json
+from .forms import LoginForm
 
 
 # Create your views here.
@@ -48,11 +49,13 @@ def login(request):
             return redirect('/')
         else:
             messages.error(request, 'Invalid username or password')
-            return render(request, 'index.html', {'login_error': True})
+            form = LoginForm()
+            return redirect('/')
     else:
         if request.user.is_authenticated:
             return render(request, 'index.html', {'user': request.user})
         else:
+            form = LoginForm()
             return render(request, 'index.html')
 
 def logout_view(request):
