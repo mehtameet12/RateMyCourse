@@ -30,17 +30,29 @@
 		</a>
 
 		<!-- Header -->
-		<header class="l-header" id="header">
+        <header class="l-header" id="header">
             <nav class="nav bd-container">
                 <a href="" class="nav__logo">Rate My Course</a>
                 <div class="nav__menu" id="nav-menu">
                     <ul class="nav__list">
-                        <li class="nav__item">
-                            <a href="#" class="nav__link" onclick="openLoginModal()">Log In</a>
-                        </li>
-                        <li class="nav__item">
-                            <a href="#" class="nav__link" onclick="openSignupModal()">Sign Up</a>
-                        </li>
+                        {% if user.is_authenticated %}
+                            <li class="nav__item">
+                                <a href="#" class="nav__link">Welcome {{ user.username }}</a>
+                            </li>
+                            <li class="nav__item">
+                                <form action="logout/" method="post" id="logout-form">
+                                    {% csrf_token %}
+                                    <button type="submit" class="nav__link nav__logout-link">Log Out</button>
+                                </form>
+                            </li>
+                        {% else %}
+                            <li class="nav__item">
+                                <a href="#" class="nav__link" onclick="openLoginModal()">Log In</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="#" class="nav__link" onclick="openSignupModal()">Sign Up</a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
                 <div class="nav__toggle" id="nav-toggle">
