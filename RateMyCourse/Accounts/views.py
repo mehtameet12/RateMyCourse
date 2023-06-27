@@ -36,25 +36,6 @@ def signup(request):
     else:
         return render(request, 'index.html')
 
-# def login(request):
-#     if request.method == 'POST':
-#         username = request.POST['username']
-#         password = request.POST['password']
-#         user = auth.authenticate(username=username, password=password)
-#         print(user)
-#         if user is not None:
-#             # User is authenticated, log them in
-#             auth.login(request, user)
-#             print('Logged In')
-#             return redirect('/')
-#         else:
-#             # Authentication failed, handle the error
-#             messages.info(request, 'Invalid Username or password')
-#             print('Error, try again')
-#             return render (request, 'index.html', {'login_error': True})
-#     else:
-#         return render(request, 'index.html')
-
 def login(request):
     if request.method == 'POST':
         username = request.POST['username']
