@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     "Results.apps.ResultsConfig",
+    "Search.apps.SearchConfig",
+    
 ]
 
 SITE_ID = 1

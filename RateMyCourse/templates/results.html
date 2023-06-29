@@ -110,31 +110,39 @@
             <!-- RESULT -->
             <section class="result_backdrop-container">
                 <div class="result" id="result">
-
-                    <div class = "fullresult bd-container">
- 
+                    <div class="fullresult bd-container">
                         <!-- Search Boxes -->
-                        <div class = "result__data ">
+                        <div class="result__data">
                             <div class="search-section">
-                                <form class="search-form" action="/search" method="GET">
-                                    <div class = "input-group">
+                                <form class="search-form" action="{% url 'search_results' %}" method="post">
+                                    {% csrf_token %}
+                                    <div class="input-group">
                                         <label for="subject-code">Enter subject code:</label>
-                                        <input type="text" id="subject-code" name="query" placeholder="Eg. SEG">
+                                        <input type="text" id="subject-code" name="subject_code" placeholder="Eg. SEG">
                                     </div>
-                                    <div class = "input-group">
+                                    <div class="input-group">
                                         <label for="course-code">Enter course code:</label>
-                                        <input type="text" id="course-code" name="query" placeholder="Eg. 3125">
+                                        <input type="text" id="course-code" name="course_code" placeholder="Eg. 3125">
                                     </div>
+                                    <button type="submit">Search</button>
                                 </form>
-                            </div>    
+                            </div>
                         </div>
+                    </div>
+                </div>
+           
+            
+              
+                
 
                         <!-- Results -->
-                        <div class="result__container">
+                        <div class="result__container bd-container">
+                            {% if results %}
+                                {% for result in results %}
                             <!-- Ratings -->    
                             <div class="ratings">
-                                <h2 class="ratings__title">Course Code</h2>
-                                <h3 class="ratings__subtitle">Course Name</h3>
+                                <h2 class="ratings__title"> {{ result.course_code }} {{ result.course_number }}</h2>
+                                <h3 class="ratings__subtitle"> {{ result.course_name }} </h3>
                                 <div class="ratings__stars" id="star-rating">
                                     <span class="star">&#9733;</span>
                                     <span class="star">&#9733;</span>
@@ -192,6 +200,8 @@
                             </div>
                         </div>
                     </div>
+                    {% endfor %}
+            {% endif %}
                 </div>
             </section>
         </main>
