@@ -107,4 +107,4 @@ function closeModal() {
 
 /* Home Annimation */
 document.querySelector('.home').classList.add('show');
-document.querySelector('.result').classList.add('show');
+document.querySelector('.result').classList.add('show');  
