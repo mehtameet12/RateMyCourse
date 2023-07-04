@@ -204,23 +204,29 @@
 
                         <!-- Card -->
                         <div class="card">
+                            {% if ratings %}
+                                {% for rating in ratings %}
                             <div class="card-header">
                                 <span class="difficulty">Difficulty: </span>
                                 <span class="highlighted-number">3</span>
                                 <span class="course-code">Course Code: XXX YYYY</span>
                             </div>
                             <div class="card-subheader">
-                            <span class="tag">For Credit: XX</span>
-                            <span class="tag">Grade: XX</span>
-                            <span class="tag">Prof Name: XX</span>
-                            <span class="tag">Textbook Required: XX</span>
-                            <span class="tag">Would Take Again: XX</span>
+                                <span class="tag">For Credit: XX</span>
+                                <span class="tag">Grade: XX</span>
+                                <span class="tag">Prof Name: XX</span>
+                                <span class="tag">Textbook Required: XX</span>
+                                <span class="tag">Would Take Again: XX</span>
                             </div>
                             <div class="card-body">
-                            <p>blaehbfiewubfboweufnwefewfewfewfewewfkjnwnvw;vwc</p>
-                            <p>blaehbfiewubfboweufnwefewfewfewfewewfkjnwnvw;vwc</p>
-                            <p>blaehbfiewubfboweufnwefewfewfewfewewfkjnwnvw;vwc</p>
+                                <p>blaehbfiewubfboweufnwefewfewfewfewewfkjnwnvw;vwc</p>
+                                <p>blaehbfiewubfboweufnwefewfewfewfewewfkjnwnvw;vwc</p>
+                                <p>blaehbfiewubfboweufnwefewfewfewfewewfkjnwnvw;vwc</p>
                             </div>
+                                {%endfor%}
+                            {% else %}
+                                <h1> No ratings found </h1>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
